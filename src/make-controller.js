@@ -364,24 +364,24 @@ module.exports = (command) => {
     painter.verticalSpace();
     const progress = new Progress(':current', { total : 8 });
     const startTime = +new Date();
-    progress.tick(); // msg 1
-    console.log(chalk.hex(colors.lightGreen)(` Creating ${chalk.bold(name)} directory...`));
+    // msg 1
+    console.log(chalk.hex(colors.lightGreen)(`[1/9] Creating ${chalk.bold(name)} directory...`));
 
     commander(`mkdir ${directory}/${name}`)
       .then(() => {
-        progress.tick(); // msg 2
-        console.log(chalk.hex(colors.lightGreen)(` Creating controller file...`));
+        // msg 2
+        console.log(chalk.hex(colors.lightGreen)(`[2/9] Creating controller file...`));
       })
       .then(() => {
         commander(`touch ${directory}/${name}/${name}.controller.js`)
           .then(() => {
-            progress.tick(); // msg 3
-            console.log(chalk.hex(colors.lightGreen)(` Adding controller code stubs...`));
+            // msg 3
+            console.log(chalk.hex(colors.lightGreen)(`[3/9] Adding controller code stubs...`));
 
             commander(`echo "${boilerplate.controller(name, modelName)}" > ${directory}/${name}/${name}.controller.js`)
               .then(() => {
-                progress.tick(); // msg 4
-                console.log(chalk.hex(colors.lightGreen)(` Creating test spec...`));
+                // msg 4
+                console.log(chalk.hex(colors.lightGreen)(`[4/9] Creating test spec...`));
               }).catch(e => console.log(e));
           })
           .catch(e => console.log(e));
@@ -389,12 +389,12 @@ module.exports = (command) => {
       .then(() => {
         commander(`touch ${directory}/${name}/${name}.spec.js`)
           .then(() => {
-            progress.tick(); // msg 5
-            console.log(chalk.hex(colors.lightGreen)(` Adding controller spec code...`));
+            // msg 5
+            console.log(chalk.hex(colors.lightGreen)(`5/9] Adding controller spec code...`));
             commander(`echo "${boilerplate.validator}" > ${directory}/${name}/${name}.spec.js`)
               .then(() => {
-                progress.tick(); // msg 6
-                console.log(chalk.hex(colors.lightGreen)(` Creating routes spec...`));
+                // msg 6
+                console.log(chalk.hex(colors.lightGreen)(`[6/9] Creating routes spec...`));
               }).catch(e => console.log(e));
           })
           .catch(e => console.log(e));
@@ -402,12 +402,12 @@ module.exports = (command) => {
       .then(() => {
         commander(`touch ${directory}/${name}/${name}.routes.spec.js`)
           .then(() => {
-            progress.tick(); // msg 5
-            console.log(chalk.hex(colors.lightGreen)(` Adding routes spec code...`));
+            // msg 7
+            console.log(chalk.hex(colors.lightGreen)(`[7/9] Adding routes spec code...`));
             commander(`echo "${boilerplate.routesTests(name, modelName)}" > ${directory}/${name}/${name}.routes.spec.js`)
               .then(() => {
-                progress.tick(); // msg 6
-                console.log(chalk.hex(colors.lightGreen)(` Creating validator...`));
+                // msg 8
+                console.log(chalk.hex(colors.lightGreen)(`[8/9] Creating validator...`));
               }).catch(e => console.log(e));
           })
           .catch(e => console.log(e));
@@ -415,11 +415,11 @@ module.exports = (command) => {
       .then(() => {
         commander(`touch ${directory}/${name}/${name}.validator.js`)
           .then(() => {
-            progress.tick(); // msg 7
-            console.log(chalk.hex(colors.lightGreen)(` Adding validator code stubs...`));
+            // msg 9
+            console.log(chalk.hex(colors.lightGreen)(`[9/9] Adding validator code stubs...`));
             commander(`echo "${boilerplate.validator}" > ${directory}/${name}/${name}.validator.js`)
               .then(() => {
-                progress.tick(); // msg 8
+                // msg 10
                 console.log(chalk.hex(colors.lightGreen)(` Done in ${+new Date() - startTime}ms`));
               }).catch(e => console.log(e));
           })
